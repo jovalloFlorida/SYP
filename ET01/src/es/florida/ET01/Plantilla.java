@@ -16,5 +16,7 @@ public class Plantilla {
 
 		isr.close();
 		br.close();
+		
+		
 	}
 }
