@@ -1,6 +1,7 @@
 //Ejercicio 10. Realiza una modificación del ejercicio anterior para que implemente un control de la entrada por teclado (admitir sólo números del 1 al 12).
 
 package es.florida.ET01;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -57,7 +58,7 @@ public class Ejercicio10 {
 		} else {
 			System.out.println("Debes introducir un numero del 1 al 12");
 		}
-		
+
 		isr.close();
 		br.close();
 	}

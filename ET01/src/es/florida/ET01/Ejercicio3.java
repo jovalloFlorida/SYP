@@ -12,10 +12,11 @@ public class Ejercicio3 {
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		System.out.print("Introduce el primer numero para hacer la suma: ");
-		String numero1=br.readLine();
+		String numero1 = br.readLine();
 		System.out.print("Introduce el segundo numero para hacer la suma: ");
-		String numero2=br.readLine();
-		System.out.print("La suma de los 2 numeros introducidos es: " + (Integer.parseInt(numero1) + Integer.parseInt(numero2)));
+		String numero2 = br.readLine();
+		System.out.print(
+				"La suma de los 2 numeros introducidos es: " + (Integer.parseInt(numero1) + Integer.parseInt(numero2)));
 		isr.close();
 		br.close();
 

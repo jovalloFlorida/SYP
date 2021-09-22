@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 public class Ejercicio2 {
 
 	public static void main(String[] args) throws IOException {
-		
+
 		InputStreamReader isr = new InputStreamReader(System.in);
 		BufferedReader br = new BufferedReader(isr);
 		System.out.print("Dime tu nombre: ");
@@ -17,7 +17,7 @@ public class Ejercicio2 {
 		System.out.println("Hola " + nombre);
 		isr.close();
 		br.close();
-		
+
 	}
 
 }

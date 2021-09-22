@@ -1,6 +1,7 @@
 //Ejercicio 9. Resolver el ejercicio anterior empleando otra estructura condicional
 
 package es.florida.ET01;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -54,7 +55,7 @@ public class Ejercicio9 {
 			System.out.println("Debes introducir un numero del 1 al 12");
 			break;
 		}
-		
+
 		isr.close();
 		br.close();
 	}
