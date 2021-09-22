@@ -16,7 +16,6 @@ public class Ejercicio17 {
 			passwd = teclado.nextLine();
 		}
 		
-				
 		boolean mayuscula = false;
 		boolean numero = false;
 		char caracter;
