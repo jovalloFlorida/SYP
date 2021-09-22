@@ -16,9 +16,27 @@ public class Ejercicio17 {
 			passwd = teclado.nextLine();
 		}
 		
-		//TODO comprobar el numero y la mayuscula
+				
+		boolean mayuscula = false;
+		boolean numero = false;
+		char caracter;
 		
-		System.out.println("Tu contraseña es: " + passwd);
+		for (int i=0;i< passwd.length();i++) {
+			caracter = passwd.charAt(i);
+			if (Character.isDigit(caracter)) {
+				numero = true;
+			}
+			if (Character.isUpperCase(caracter)) {
+				mayuscula = true;
+			}
+		}
+		
+		if (numero == true && mayuscula == true) {
+			System.out.println("La contraseña introducida es correcta");
+		} else {
+			System.out.println("La contraseña introducida es incorrecta, debe tener al menos 5 caracteres, un numero y una mayuscula");
+		}
+			
 		
 		teclado.close();
 
