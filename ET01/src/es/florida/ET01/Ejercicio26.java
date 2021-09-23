@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Ejercicio26 {
 
-	
+	static int notasSuspendida = 0, notasAprobada = 0, notasSuficiente = 0, notasBien = 0, notasNotable = 0,
+			notasSobresaliente = 0, notasMatricula = 0;
 	
 	public static void main(String[] args) {
 		Scanner teclado = new Scanner(System.in);
@@ -27,11 +28,8 @@ public class Ejercicio26 {
 		System.out.println("Hay " + notasMatricula + " Matriculas");
 
 		teclado.close();
-
 	}
 
-	static int notasSuspendida = 0, notasAprobada = 0, notasSuficiente = 0, notasBien = 0, notasNotable = 0,
-			notasSobresaliente = 0, notasMatricula = 0;
 	
 	public static void comprobarNotas(double nota) {
 		if (nota < 5) {
