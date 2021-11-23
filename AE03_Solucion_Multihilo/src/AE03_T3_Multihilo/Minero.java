@@ -1,3 +1,4 @@
+
 package AE03_T3_Multihilo;
 
 public class Minero implements Runnable{//implemento Runnable porque con esta clase crearemos los hilos (Threads)
