@@ -1,4 +1,3 @@
-
 package AE03_T3_Multihilo;
 
 public class Ventilador { // clase ventilador que crearemos en app

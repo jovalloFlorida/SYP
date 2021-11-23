@@ -1,4 +1,3 @@
-
 package AE03_T3_Multihilo;
 
 //Clase Mina que tiene un metodo constructor donde tendremos el stock de la mina
