@@ -21,14 +21,14 @@ public class Ejercicio8_ClienteCalculo {
 
 	public static void main(String[] args) throws IOException {
 		
-		String[] operacion = {"+","100","50"}; 
+		String[] operacion = {"-","100","50"}; 
 		
 		System.out.println("CLIENTE >>> Arranca cliente");
-		System.out.println("CLIENTE >>> Conexional servidor");
-		//Scanner teclado = new Scanner(System.in);
-		//System.out.print("Introduce la IP: ");
-		//String host = teclado.nextLine();
-		InetSocketAddress direccion = new InetSocketAddress("localhost", 5000);
+		System.out.println("CLIENTE >>> Conexion al servidor");
+		Scanner teclado = new Scanner(System.in);
+		System.out.print("Introduce la IP: ");
+		String host = teclado.nextLine();
+		InetSocketAddress direccion = new InetSocketAddress(host, 5000);
 		Socket socket = new Socket();
 		socket.connect(direccion);
 		
