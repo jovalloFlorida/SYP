@@ -33,7 +33,7 @@ public class Ejercicio8_ServidorCalculo {
 	public static void main(String[] args) throws IOException {
 		
 		System.err.println("SERVIDOR >>> Arranca el servidor, espera peticion...");
-		ServerSocket socketEscucha = new ServerSocket(5001);
+		ServerSocket socketEscucha = new ServerSocket(5000);
 		while (true) {
 			Socket conexion = socketEscucha.accept();
 			System.err.println("SERVIDOR >>> Conexion recibida!");

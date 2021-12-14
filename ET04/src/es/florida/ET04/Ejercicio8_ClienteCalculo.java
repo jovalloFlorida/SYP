@@ -35,7 +35,7 @@ public class Ejercicio8_ClienteCalculo {
 		System.out.println(">>> Envio de datos para el calculo: " + operacion[1] + " " + operacion[0] + " " +operacion[2]);
 		PrintWriter pw = new PrintWriter(socket.getOutputStream());
 		pw.print(operacion[0]+"\n");
-		pw.print(operacion[1]+"n");
+		pw.print(operacion[1]+"\n");
 		pw.print(operacion[2]+"\n");
 		pw.flush();
 		
