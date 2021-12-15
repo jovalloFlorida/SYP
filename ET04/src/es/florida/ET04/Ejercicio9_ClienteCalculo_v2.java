@@ -20,10 +20,15 @@ public class Ejercicio9_ClienteCalculo_v2 {
 	public static void main(String[] args) throws IOException {
 
 		String nombreCliente = "CLIENTE";
-		String[] operacion = { "+", "100", "50" };
+		String[] operacion = { "*", "100", "50" };
 		if (args.length > 0) {
 			nombreCliente = args[0];
-			operacion[0] = args[1];
+			String tipoOperacion = args[1];
+			if (tipoOperacion.length() >1) {
+				operacion[0] = tipoOperacion.substring(1);
+			} else {
+				operacion[0] = tipoOperacion;
+			}
 			operacion[1] = args[2];
 			operacion[2] = args[3];
 		}
@@ -33,16 +38,17 @@ public class Ejercicio9_ClienteCalculo_v2 {
 		Scanner teclado = new Scanner(System.in);
 		System.out.print("Introduce la IP: ");
 		String host = teclado.nextLine();
-		InetSocketAddress direccion = new InetSocketAddress(host, 5000);
+		InetSocketAddress direccion = new InetSocketAddress(host, 9876);
 		Socket socket = new Socket();
 		socket.connect(direccion);
 
 		System.out.println(nombreCliente + " >>> Envio de datos para el calculo: " + operacion[1] + " " + operacion[0]
-				+ " " + operacion[2]);
+				+ " " + operacion[2] + " " + nombreCliente);
 		PrintWriter pw = new PrintWriter(socket.getOutputStream());
 		pw.print(operacion[0] + "\n");
 		pw.print(operacion[1] + "\n");
 		pw.print(operacion[2] + "\n");
+		pw.print(nombreCliente + "\n");
 		pw.flush();
 
 		System.out.println("CLIENTE >>> Preparado canal para recibir resultado");

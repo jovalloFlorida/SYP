@@ -38,13 +38,14 @@ public int calcular(String op, String n1, String n2) {
 			bfr = new BufferedReader(isr);
 			OutputStream os = socket.getOutputStream();
 			pw = new PrintWriter(os);
-			String linea = bfr.readLine();
 			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Lee datos para la operacion");
+			String operador = bfr.readLine();
 			String num1 = bfr.readLine();
 			String num2 = bfr.readLine();
-			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Realiza la operacion");
-			Integer result = calcular(linea, num1, num2);
-			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Devuleve resultado");
+			String nombreCliente = bfr.readLine();
+			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Cliente " + nombreCliente + " Realiza la operacion");
+			Integer result = calcular(operador, num1, num2);
+			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Cliente " + nombreCliente + " Devuleve resultado");
 			pw.write(result.toString() + "\n");
 			pw.flush();
 			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Espera nueva peticion");
