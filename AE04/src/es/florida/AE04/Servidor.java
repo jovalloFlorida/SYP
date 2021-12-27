@@ -25,7 +25,7 @@ public class Servidor implements Runnable {
 	}
 
 	/**
-	 * Funcion para una vez recibida la contraseña, la devuelve encriptada (Sustitucion por caractes ASCII inmediatamente posterior de la tabla ASCII.
+	 * Metodo para una vez recibida la contraseña, la devuelve encriptada (Sustitucion por caractes ASCII inmediatamente posterior de la tabla ASCII.
 	 * @param pwd
 	 * @return
 	 */
@@ -50,6 +50,11 @@ public class Servidor implements Runnable {
 		return nuevoPasswd;
 	}
 	
+	/**
+	 * Metodo para encriptar la contraseña en MD5 
+	 * @param input
+	 * @return
+	 */
 	public static String getMD5(String input) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
