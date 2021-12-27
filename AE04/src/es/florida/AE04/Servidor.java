@@ -13,6 +13,8 @@ import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class Servidor implements Runnable {
 
@@ -25,7 +27,9 @@ public class Servidor implements Runnable {
 	}
 
 	/**
-	 * Metodo para una vez recibida la contraseña, la devuelve encriptada (Sustitucion por caractes ASCII inmediatamente posterior de la tabla ASCII.
+	 * Metodo para una vez recibida la contraseña, la devuelve encriptada
+	 * (Sustitucion por caractes ASCII inmediatamente posterior de la tabla ASCII.
+	 * 
 	 * @param pwd
 	 * @return
 	 */
@@ -49,9 +53,10 @@ public class Servidor implements Runnable {
 		}
 		return nuevoPasswd;
 	}
-	
+
 	/**
-	 * Metodo para encriptar la contraseña en MD5 
+	 * Metodo para encriptar la contraseña en MD5
+	 * 
 	 * @param input
 	 * @return
 	 */
@@ -79,18 +84,33 @@ public class Servidor implements Runnable {
 			Contrasenya passwd = new Contrasenya("", "");
 			outObjeto.writeObject(passwd);
 
-			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Conexion Recicida...");
+			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Conexion Recibida...");
 
 			// Recibimiento del Objeto
 			ObjectInputStream inObjeto = new ObjectInputStream(socket.getInputStream());
 			Contrasenya pMod = (Contrasenya) inObjeto.readObject();
 			String contrasenyaPlana = pMod.getcontrasenyaTextoPlano();
 
-			// Realiza la conversion de la contraseña
+			// Realiza la conversion de la contraseña y se pide que tipo de encryptacion (ASCII / MD5)
 			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Servidor realiza la conversion...");
-			String newPasswd = "Contraseña ASCII: " + conversion(contrasenyaPlana) + " / Contraseña MD5: " + getMD5(contrasenyaPlana);
-			pMod.setcontrasenyaTextoPlano(newPasswd);
+			System.out.print("SERVIDOR >>> Introduce tipo Contraseña Encryptada (1. ASCII / 2. MD5): ");
+			Scanner teclado = new Scanner(System.in);
+			int tipoContrasenya = Integer.parseInt(teclado.next());
+			String newPasswd = "";
 			
+			switch (tipoContrasenya) {
+			case 1:
+				newPasswd = "Contraseña Encryptada ASCII: " + conversion(contrasenyaPlana);
+				break;
+			case 2:
+				newPasswd = "Contraseña Encryptada MD5: " + getMD5(contrasenyaPlana);
+				break;
+			default:
+				System.err.print("SERVIDOR >>> OPCION INCORRECTA... ");
+				break;
+			}	
+			
+			pMod.setcontrasenyaTextoPlano(newPasswd);
 
 			// Devuleve el resultado
 			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Servidor devuelve el resultado...");
@@ -99,12 +119,8 @@ public class Servidor implements Runnable {
 			pw.write(newPasswd + "\n");
 			pw.flush();
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("\n <<< Excepcion: Opcion no Admitida >>>");
 		}
 
 	}
