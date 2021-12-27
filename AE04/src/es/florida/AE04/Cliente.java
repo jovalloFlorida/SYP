@@ -46,7 +46,9 @@ public class Cliente {
 		BufferedReader bfr = new BufferedReader(isr);
 		
 		String resultado = bfr.readLine();
-		System.out.println("CLIENTE >>> Recibe resultado de SERVIDOR: " + resultado);
+		System.out.println("CLIENTE >>> Recibe informacion del SERVIDOR...");
+		System.out.println("CLIENTE >>> " + resultado);
+		 
 		
 	}
 }

@@ -9,7 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.net.Socket;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Servidor implements Runnable {
 
@@ -46,6 +49,22 @@ public class Servidor implements Runnable {
 		}
 		return nuevoPasswd;
 	}
+	
+	public static String getMD5(String input) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] messageDigest = md.digest(input.getBytes());
+			BigInteger number = new BigInteger(1, messageDigest);
+			String hashtext = number.toString(16);
+
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	public void run() {
 
@@ -64,8 +83,9 @@ public class Servidor implements Runnable {
 
 			// Realiza la conversion de la contraseña
 			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Servidor realiza la conversion...");
-			String newPasswd = conversion(contrasenyaPlana);
+			String newPasswd = "Contraseña ASCII: " + conversion(contrasenyaPlana) + " / Contraseña MD5: " + getMD5(contrasenyaPlana);
 			pMod.setcontrasenyaTextoPlano(newPasswd);
+			
 
 			// Devuleve el resultado
 			System.err.println("SERVIDOR Hilo " + Thread.currentThread().getName() + " >>> Servidor devuelve el resultado...");
