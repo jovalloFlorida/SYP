@@ -1,13 +1,17 @@
+/**
+ * Clase para crear los Constructores y Getters y Setters
+ */
 package es.florida.AE04;
 
-public class Contrasenya {
+import java.io.Serializable;
+
+public class Contrasenya implements Serializable{
 	
 	String contrasenyaTextoPlano;
 	String contrasenyaEncriptada;
 	
 	public Contrasenya() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Contrasenya(String contrasenyaTextoPlano, String contrasenyaEncriptada) {
@@ -37,9 +41,4 @@ public class Contrasenya {
 		return "Contrasenya [Contrasenya Texto Plano --> " + contrasenyaTextoPlano
 				+ ", Contrasenya Encriptada --> " + contrasenyaEncriptada + "]";
 	}
-	
-	
-	
-	
-
 }

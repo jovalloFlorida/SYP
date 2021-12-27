@@ -13,15 +13,21 @@ public class ServidorObjeto {
 		ServerSocket servidor = new ServerSocket(numeroPuerto);
 		System.err.println("SERVIDOR >> Escuchando...");
 		Socket cliente = servidor.accept();
+		
 		ObjectOutputStream outObjeto = new ObjectOutputStream(cliente.getOutputStream());
 		Thread.sleep(2000);
 		Persona p = new Persona("Nombre", 0);
 		outObjeto.writeObject(p);
+		
 		System.err.println("SERVIDOR >> Envio a cliente: " + p.getNombre() + " - " + p.getEdad());
+		Thread.sleep(2000);
+		
 		ObjectInputStream inObjeto = new ObjectInputStream(cliente.getInputStream());
 		Persona pMod = (Persona) inObjeto.readObject();
 		Thread.sleep(2000);
 		System.err.println("SERVIDOR >> Recibo de cliente: " + pMod.getNombre() + " - " + pMod.getEdad());
+		
+		
 		outObjeto.close();
 		inObjeto.close();
 		cliente.close();

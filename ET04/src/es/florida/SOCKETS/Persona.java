@@ -2,7 +2,7 @@ package es.florida.SOCKETS;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
+//@SuppressWarnings("serial")
 public class Persona implements Serializable{
 	String nombre;
 	int edad;
