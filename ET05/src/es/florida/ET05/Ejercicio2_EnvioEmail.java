@@ -93,15 +93,15 @@ public class Ejercicio2_EnvioEmail {
 
 		String strMensaje = "Buenas tardes,\nEnvio un email a mi cuenta de florida.";
 		String strAsunto = "Tema 5 - Ejercicio2";
-		String emailRemitente = "mamphersan@gmail.com";
+		String emailRemitente = "dam.syp.laflorida@gmail.com";
 		//Scanner teclado = new Scanner(System.in);
 		System.out.println("Comprobando contraseña...");
-		String emailRemitentePass = "florida22*";
+		String emailRemitentePass = ("Wodu504550");
 		String hostEmail = "smtp.gmail.com";
 		String portEmail = "587";
-		String[] emailDestino = { "mahesa@floridauniversitaria.es" };
-		String[] anexo = { "C:\\Users\\mamph\\Pictures\\imagen_red.jpg" };
-
+		String[] emailDestino = {"jovall@floridauniversitaria.es"};
+		String[] anexo = { "C:\\homer.jpg" };
+		
 		try {
 			envioMail(strMensaje, strAsunto, emailRemitente, emailRemitentePass, hostEmail, portEmail, emailDestino,
 					anexo);

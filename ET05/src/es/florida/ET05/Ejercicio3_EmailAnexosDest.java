@@ -16,8 +16,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 public class Ejercicio3_EmailAnexosDest {
+	
 	public static void envioMail(String mensaje, String asunto, String email_remitente, String email_remitente_pass,
 			String host_email, String port_email, String[] email_destino, String[] anexo)
 			throws UnsupportedEncodingException, MessagingException {
@@ -85,15 +88,18 @@ public class Ejercicio3_EmailAnexosDest {
 
 		String strMensaje = "a ver a quien le llega. varios destinatarios";
 		String strAsunto = "Tema 5 - Ejercicio3";
-		String emailRemitente = "mamphersan@gmail.com";
+		String emailRemitente = "dam.syp.laflorida@gmail.com";
+		//Pedimos contraseña mediante ventana emergente
+		JPasswordField pwd = new JPasswordField(15);
+		JOptionPane.showConfirmDialog(null, pwd, "Introducir contraseña" , JOptionPane.OK_CANCEL_OPTION);
+		String emailRemitentePass = new String(pwd.getPassword());
 		// Scanner teclado = new Scanner(System.in);
-		System.out.println("Comprobando contraseña...");
-		String emailRemitentePass = "florida22*";
+		//System.out.println("Comprobando contraseña...");
+		//String emailRemitentePass = "Wodu504550";
 		String hostEmail = "smtp.gmail.com";
 		String portEmail = "587";
-		String emailDestino[] = { "mamp.herraez@gmail.com", "increibleshiva206@gmail.com" };
-		String anexo[] = { "C:\\Users\\mamph\\Pictures\\imagen_red.jpg",
-				"C:\\Users\\mamph\\Pictures\\imagen_red - copia.jpg" };
+		String emailDestino[] = { "jovallo@gmail.com", "jovall@floridauniversitaria.es" };
+		String anexo[] = { "C:\\homer.jpg", "C:\\devlist.txt" };
 
 		try {
 			envioMail(strMensaje, strAsunto, emailRemitente, emailRemitentePass, hostEmail, portEmail, emailDestino,
