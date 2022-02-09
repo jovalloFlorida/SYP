@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-
+import java.io.UnsupportedEncodingException;
+import javax.mail.MessagingException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -26,8 +27,7 @@ public class GestorHTTP implements HttpHandler {
 		} else if ("POST".equals(httpExchange.getRequestMethod())) {
 			try {
 				requestParamValue = handlePostRequest(httpExchange);
-			} catch (IOException | InterruptedException e) {
-				// TODO Auto-generated catch block
+			} catch (IOException | InterruptedException | MessagingException e) {
 				e.printStackTrace();
 			}
 			handlePOSTResponse(httpExchange, requestParamValue);
@@ -65,33 +65,40 @@ public class GestorHTTP implements HttpHandler {
 
 	/**
 	 * Metodo para procesar la informacion que nos llega, para realizar la
-	 * actualizacion de la temperatura y llamar al al metodo regularTemperatura()
+	 * actualizacion de la temperatura y llamar al al metodo regularTemperatura().
+	 * Enviara un email de AVERIA cuando la temperatura sea inferior a 0º o superior
+	 * a 50º
 	 * 
 	 * @param httpExchange
 	 * @return
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	private String handlePostRequest(HttpExchange httpExchange) throws IOException, InterruptedException {
+
+	private String handlePostRequest(HttpExchange httpExchange)
+			throws IOException, InterruptedException, UnsupportedEncodingException, MessagingException {
 		InputStream inputStream = httpExchange.getRequestBody();
 		InputStreamReader isr = new InputStreamReader(inputStream);
 		BufferedReader br = new BufferedReader(isr);
-		String frase = br.readLine();
+		String linea = br.readLine();
 		System.out.println("\nActualizando hasta la Temperatura deseada...\n");
-		if (frase.split("=")[0].equals("setTemperatura")) {
-			String temperaturaOrdenada = frase.split("=")[1];
-			temperaturaTermostato = Integer.parseInt(temperaturaOrdenada);
-			if (temperaturaTermostato < 0 || temperaturaTermostato > 80) {
-				String postRequest = "El valor de temperatura " + temperaturaOrdenada + "No es es correcto...";
-				return postRequest;
+		if (linea.split("=")[0].equals("setTemperatura")) {
+			String temperaturaValor = linea.split("=")[1];
+			temperaturaTermostato = Integer.parseInt(temperaturaValor);
+			if (temperaturaTermostato < 1 || temperaturaTermostato > 50) {
+				System.err.println("\nLa temperatura no debe exceder de 50º o bajar de 1º...");
+				System.err.println("AVERIA. Temperatura ERRONEA. Envio de email a los destinatarios...\n");
+				// Llamamos al Servidor Email para enviar los correos
+				ServidorEmail.main(null);
 			}
-			String postRequest = "Actualizada Temperatura deseada hasta: " + temperaturaOrdenada + " grados...";
+			String postRequest = "Actualizada Temperatura deseada hasta: " + temperaturaValor + " grados...";
 			regularTemperatura();
 			return postRequest;
 		} else {
-			String postRequest = "Error de comando.";
+			String postRequest = "Error de Sintaxis del comando...";
 			return postRequest;
 		}
+
 	}
 
 	/**
@@ -103,7 +110,7 @@ public class GestorHTTP implements HttpHandler {
 	 */
 	private void handlePOSTResponse(HttpExchange httpExchange, String requestParamValue) throws IOException {
 		OutputStream outputStream = httpExchange.getResponseBody();
-		//String htmlResponse = "Orden recibida: " + requestParamValue;
+		// String htmlResponse = "Orden recibida: " + requestParamValue;
 		String htmlResponse = "Respuesta a la peticion POST";
 		httpExchange.sendResponseHeaders(200, htmlResponse.length());
 		outputStream.write(htmlResponse.getBytes());
@@ -113,6 +120,7 @@ public class GestorHTTP implements HttpHandler {
 
 	/**
 	 * Metodo para el calculo de la temperaturaActual con una pausa de 5 segundos.
+	 * 
 	 * @throws InterruptedException
 	 */
 	private void regularTemperatura() throws InterruptedException {
