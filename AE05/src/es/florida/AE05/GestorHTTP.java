@@ -85,7 +85,7 @@ public class GestorHTTP implements HttpHandler {
 		if (linea.split("=")[0].equals("setTemperatura")) {
 			String temperaturaValor = linea.split("=")[1];
 			temperaturaTermostato = Integer.parseInt(temperaturaValor);
-			if (temperaturaTermostato < 1 || temperaturaTermostato > 50) {
+			if (temperaturaTermostato < 0 || temperaturaTermostato > 50) {
 				System.err.println("\nLa temperatura no debe exceder de 50º o bajar de 1º...");
 				System.err.println("AVERIA. Temperatura ERRONEA. Envio de email a los destinatarios...\n");
 				// Llamamos al Servidor Email para enviar los correos
@@ -126,7 +126,7 @@ public class GestorHTTP implements HttpHandler {
 	private void regularTemperatura() throws InterruptedException {
 
 		while (temperaturaTermostato != temperaturaActual) {
-			Thread.sleep(5000);
+			Thread.sleep(500);
 			if (temperaturaTermostato > temperaturaActual) {
 				temperaturaActual += 1;
 				System.out.println("Temperatura Actual: " + temperaturaActual);
